@@ -48,20 +48,6 @@ func NewClient(options Options) *Client {
 	return c
 }
 
-// CompareSignature compares the signature from the webhook request with the expected signature.
-func (c *Client) CompareSignature(body []byte, headers map[string][]string) bool {
-	expectedSignature := common.GenerateSignature(string(body), c.apiKey)
-
-	signature := ""
-	if sigs, ok := headers["Signature"]; ok && len(sigs) > 0 {
-		signature = sigs[0]
-	} else {
-		return false
-	}
-
-	return expectedSignature == signature
-}
-
 // Do send a request to the bovapay api.
 func (c *Client) Do(method, endpoint string, body map[string]interface{}) ([]byte, error) {
 	url := apiUrl + endpoint
