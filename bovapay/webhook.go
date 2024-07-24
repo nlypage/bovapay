@@ -6,8 +6,8 @@ import (
 )
 
 // CompareSignature compares the signature from the webhook request with the expected signature.
-func (c *Client) CompareSignature(body []byte, headers map[string][]string) bool {
-	expectedSignature := common.GenerateSignature(string(body), c.apiKey)
+func CompareSignature(body []byte, headers map[string][]string, apiKey string) bool {
+	expectedSignature := common.GenerateSignature(string(body), apiKey)
 
 	signature := ""
 	if sigs, ok := headers["Signature"]; ok && len(sigs) > 0 {
@@ -37,7 +37,7 @@ type WebhookUpdate struct {
 }
 
 // ParseWebhookUpdate parses the webhook update from the request body.
-func (c *Client) ParseWebhookUpdate(data []byte) (*WebhookUpdate, error) {
+func ParseWebhookUpdate(data []byte) (*WebhookUpdate, error) {
 	var webhookUpdate WebhookUpdate
 	if err := json.Unmarshal(data, &webhookUpdate); err != nil {
 		return nil, err
