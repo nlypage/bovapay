@@ -19,7 +19,7 @@ type CreateDepositRequest struct {
 	//IP of the user who will pay for the application.
 	PayeerIP string `json:"payeer_ip"`
 
-	// Primary or secondary is indicated: "ftd" or "trust".
+	// Primary or Secondary is indicated: "ftd" or "trust".
 	PayeerType payeerType `json:"payeer_type"`
 
 	// Application lifetime specified in seconds (up to a maximum of 30 minutes)
