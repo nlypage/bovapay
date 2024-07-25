@@ -71,8 +71,9 @@ type CreateDepositResponse struct {
 	Data Deposit `json:"data"`
 }
 
+// CreateDeposit creates a new deposit using the merchant/v1/deposits endpoint
 func (c *Client) CreateDeposit(createDepositRequest CreateDepositRequest) (*Deposit, error) {
-	r := request{
+	r := &request{
 		method:   http.MethodPost,
 		endpoint: "merchant/v1/deposits",
 	}
@@ -100,7 +101,7 @@ func (c *Client) CreateDeposit(createDepositRequest CreateDepositRequest) (*Depo
 		r.Add("customer_name", createDepositRequest.CustomerName)
 	}
 
-	resp, err := c.Do(r.method, r.endpoint, r.body)
+	resp, err := c.Do(r)
 	if err != nil {
 		return nil, err
 	}

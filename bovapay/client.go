@@ -49,15 +49,15 @@ func NewClient(options Options) *Client {
 }
 
 // Do send a request to the bovapay api.
-func (c *Client) Do(method, endpoint string, body map[string]interface{}) ([]byte, error) {
-	url := apiUrl + endpoint
+func (c *Client) Do(r *request) ([]byte, error) {
+	url := apiUrl + r.endpoint
 
-	jsonBody, errMarshal := json.Marshal(body)
+	jsonBody, errMarshal := json.Marshal(r.body)
 	if errMarshal != nil {
 		return nil, errMarshal
 	}
 
-	req, err := http.NewRequest(method, url, bytes.NewBuffer(jsonBody))
+	req, err := http.NewRequest(r.method, url, bytes.NewBuffer(jsonBody))
 	if err != nil {
 		return nil, err
 	}
