@@ -21,14 +21,16 @@ func CompareSignature(body []byte, headers map[string][]string, apiKey string) b
 
 // WebhookUpdate represents the data that you will receive from the webhook.
 type WebhookUpdate struct {
-	ID                  string  `json:"id"`
-	MerchantID          string  `json:"merchant_id"`
-	Status              string  `json:"status"`
-	Message             string  `json:"message"`
-	Currency            string  `json:"currency"`
-	PaymentMethod       string  `json:"payment_method"`
-	Rate                float64 `json:"rate"`
-	Amount              float64 `json:"amount"`
+	ID            string  `json:"id"`
+	MerchantID    string  `json:"merchant_id"`
+	Status        string  `json:"status"`
+	Message       string  `json:"message"`
+	Currency      string  `json:"currency"`
+	PaymentMethod string  `json:"payment_method"`
+	Rate          float64 `json:"rate"`
+	// Amount in USDT
+	Amount float64 `json:"amount"`
+	// FiatAmount in RUB
 	FiatAmount          float64 `json:"fiat_amount"`
 	OldFiatAmount       float64 `json:"old_fiat_amount"`
 	ServiceCommission   float64 `json:"service_commission"`

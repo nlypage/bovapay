@@ -32,3 +32,17 @@ type merchantResponse struct {
 	Status  string                 `json:"status"`
 	Meta    map[string]interface{} `json:"meta"`
 }
+
+// Transaction states
+const (
+	StatusCreated                   string = "created"
+	StatusProcessing                string = "processing"
+	StatusWaitingPayment            string = "waiting_payment"
+	StatusPaid                      string = "paid"
+	StatusSuccessed                 string = "successed"
+	StatusFailed                    string = "failed"
+	StatusClosedFailed              string = "closed_failed"
+	StatusRepeatedClosedFailed      string = "repeated_closed_failed"
+	StatusAcceptedSuccessed         string = "accepted_successed"
+	StatusRepeatedAcceptedSuccessed string = "repeated_accepted_successed"
+)
