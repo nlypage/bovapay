@@ -27,7 +27,7 @@ type WebhookUpdate struct {
 	Message       string  `json:"message"`
 	Currency      string  `json:"currency"`
 	PaymentMethod string  `json:"payment_method"`
-	Rate          float64 `json:"rate"`
+	Rate          float64 `json:"rate,string"`
 	// Amount in USDT
 	Amount float64 `json:"amount,string"`
 	// FiatAmount in RUB
