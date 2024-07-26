@@ -7,17 +7,18 @@ import (
 )
 
 type Rates struct {
-	UsdtRub float64 `json:"usdt_rub"`
-	UsdtUah float64 `json:"usdt_uah"`
-	UsdtUzs float64 `json:"usdt_uzs"`
-	UsdtKgs float64 `json:"usdt_kgs"`
+	UsdtRub float64 `json:"usdt_rub,string"`
+	UsdtUah float64 `json:"usdt_uah,string"`
+	UsdtUzs float64 `json:"usdt_uzs,string"`
+	UsdtKgs float64 `json:"usdt_kgs,string"`
 }
 
 // GetRates is a function to get currency pair rates using merchant/rates endpoint.
 func (c *Client) GetRates() (*Rates, error) {
 	r := &request{
-		method:   http.MethodGet,
-		endpoint: "merchant/rates",
+		method:            http.MethodGet,
+		endpoint:          "v1/merchant/rates",
+		authorizationType: authorizationToken,
 	}
 
 	resp, err := c.Do(r)

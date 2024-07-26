@@ -50,19 +50,19 @@ type CreateDepositRequest struct {
 }
 
 type Deposit struct {
-	UUID                   string `json:"uuid"`
-	MerchantID             string `json:"merchant_id"`
-	Amount                 string `json:"amount"`
-	FiatAmount             string `json:"fiat_amount"`
-	Currency               string `json:"currency"`
-	State                  string `json:"state"`
-	SelectedCryptoCurrency string `json:"selected_crypto_currency"`
-	CallbackURL            string `json:"callback_url"`
-	RedirectURL            string `json:"redirect_url"`
-	CreatedAt              string `json:"created_at"`
-	UpdatedAt              string `json:"updated_at"`
-	FormURL                string `json:"form_url"`
-	SourceTransactionClass string `json:"source_transaction_class"`
+	UUID                   string  `json:"uuid"`
+	MerchantID             string  `json:"merchant_id"`
+	Amount                 float64 `json:"amount,string"`
+	FiatAmount             float64 `json:"fiat_amount,string"`
+	Currency               string  `json:"currency"`
+	State                  string  `json:"state"`
+	SelectedCryptoCurrency string  `json:"selected_crypto_currency"`
+	CallbackURL            string  `json:"callback_url"`
+	RedirectURL            string  `json:"redirect_url"`
+	CreatedAt              string  `json:"created_at"`
+	UpdatedAt              string  `json:"updated_at"`
+	FormURL                string  `json:"form_url"`
+	SourceTransactionClass string  `json:"source_transaction_class"`
 	//SourceTransaction any `json:"source_transaction"`
 }
 
@@ -74,8 +74,9 @@ type CreateDepositResponse struct {
 // CreateDeposit creates a new deposit using the merchant/v1/deposits endpoint
 func (c *Client) CreateDeposit(createDepositRequest CreateDepositRequest) (*Deposit, error) {
 	r := &request{
-		method:   http.MethodPost,
-		endpoint: "merchant/v1/deposits",
+		method:            http.MethodPost,
+		endpoint:          "merchant/v1/deposits",
+		authorizationType: signature,
 	}
 	r.Add("user_uuid", c.userUuid)
 	r.Add("merchant_id", createDepositRequest.MerchantID)

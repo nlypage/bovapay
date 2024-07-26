@@ -62,9 +62,16 @@ func (c *Client) Do(r *request) ([]byte, error) {
 		return nil, err
 	}
 
-	signature := common.GenerateSignature(string(jsonBody), c.apiKey)
+	switch r.authorizationType {
+	case signatureAuthorization:
+		signature := common.GenerateSignature(string(jsonBody), c.apiKey)
 
-	req.Header.Set("Signature", signature)
+		req.Header.Set("Signature", signature)
+
+	case authorizationToken:
+		req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.apiKey))
+	}
+
 	req.Header.Set("Content-Type", "application/json")
 
 	resp, err := c.httpClient.Do(req)
