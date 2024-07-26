@@ -76,7 +76,7 @@ func (c *Client) CreateDeposit(createDepositRequest CreateDepositRequest) (*Depo
 	r := &request{
 		method:            http.MethodPost,
 		endpoint:          "merchant/v1/deposits",
-		authorizationType: signature,
+		authorizationType: signatureAuthorization,
 	}
 	r.Add("user_uuid", c.userUuid)
 	r.Add("merchant_id", createDepositRequest.MerchantID)
