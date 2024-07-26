@@ -33,7 +33,7 @@ type WebhookUpdate struct {
 	// FiatAmount in RUB
 	FiatAmount          float64 `json:"fiat_amount,string"`
 	OldFiatAmount       float64 `json:"old_fiat_amount,string"`
-	ServiceCommission   float64 `json:"service_commission"`
+	ServiceCommission   float64 `json:"service_commission,string"`
 	PayeerCardNumber    *string `json:"payeer_card_number"`
 	RecipientCardNumber *string `json:"recipient_card_number"`
 }
